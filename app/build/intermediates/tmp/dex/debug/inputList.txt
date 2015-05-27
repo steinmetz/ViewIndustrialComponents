@@ -1,0 +1,2 @@
+/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/classes/debug
+/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/line-chart-view-0.1.7-a58976c172f952bfe868df7ca159b2aa335af7d0.jar

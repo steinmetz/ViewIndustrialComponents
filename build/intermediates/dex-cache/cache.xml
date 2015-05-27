@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/charles/.gradle/caches/modules-2/files-2.1/org.hogel/line-chart-view/0.1.7/a1911f87090838fe8f19bd0fe535a8df88264495/line-chart-view-0.1.7.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a1911f87090838fe8f19bd0fe535a8df88264495">
+        <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/line-chart-view-0.1.7-a58976c172f952bfe868df7ca159b2aa335af7d0.jar" />
+    </item>
+
+</items>
