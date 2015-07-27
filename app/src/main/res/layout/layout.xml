@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:layout_width="120dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:text="3D"
             android:id="@+id/button"
@@ -22,18 +22,25 @@
             android:layout_gravity="center_horizontal" />
 
         <Button
-            android:layout_width="120dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:text="Características"
+            android:text="Caract."
             android:onClick="caracteristicaView"
             android:id="@+id/button2" />
 
         <Button
-            android:layout_width="120dp"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:text="Dados Manut."
+            android:text="D. Manut."
             android:onClick="dadosManutView"
             android:id="@+id/button3" />
+
+        <Button
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:text="Variáveis"
+            android:onClick="variaveis"
+            android:id="@+id/button4" />
     </LinearLayout>
 
     <LinearLayout

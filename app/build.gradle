@@ -16,7 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         dependencies {
+            compile fileTree(dir: 'libs', include: ['*.jar'])
             compile 'org.hogel:line-chart-view:0.1.7'
+            compile 'com.mcxiaoke.volley:library:1.0.17'
+            compile files('libs/gson-2.3.1.jar')
         }
     }
 }

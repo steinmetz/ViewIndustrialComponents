@@ -8,5 +8,12 @@
         sha1="a1911f87090838fe8f19bd0fe535a8df88264495">
         <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/line-chart-view-0.1.7-a58976c172f952bfe868df7ca159b2aa335af7d0.jar" />
     </item>
+    <item
+        jar="/home/charles/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.17/f417d7f776d1ee5858fc04d9362aa45e9bedd26b/library-1.0.17.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f417d7f776d1ee5858fc04d9362aa45e9bedd26b">
+        <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/library-1.0.17-a162bd7f69c7299869a9c9459f5c96356a4727bc.jar" />
+    </item>
 
 </items>

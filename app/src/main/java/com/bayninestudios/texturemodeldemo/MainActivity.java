@@ -8,12 +8,23 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 import android.opengl.GLUtils;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.bayninestudios.texturemodeldemo.beans.Component;
 
 import org.hogel.android.linechartview.LineChartView;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +47,14 @@ public class MainActivity extends Activity {
      * Called when the activity is first created.
      */
 
-    boolean touching  =false;
+    boolean touching = false;
     static float prevDist = 0;
 
     LinearLayout linearContent;
+
+    LinearLayout linearDados;
+
+    String json = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,11 +64,60 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.layout);
 
+
         linearContent = (LinearLayout) findViewById(R.id.linearContent);
 
         mGLView = (GLSurfaceView) findViewById(R.id.surfaceView);
 
+        try {
+            String url = "http://143.54.124.135/cps";
 
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                    (Request.Method.GET,
+                            url,
+                            "",
+                            new Response.Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_SHORT).show();
+                                    Log.i("SSS", response.toString());
+                                    //mTxtDisplay.setText("Response: " + response.toString());
+                                }
+                            },
+                            new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.i("SSS", error.getMessage());
+
+                                }
+                            });
+
+// Access the RequestQueue through your singleton class.
+            MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            linearContent.addView(newRow("Charles", "123"));
+                        }
+                    });
+                    SystemClock.sleep(1000);
+                }
+            }
+        };
+
+
+        Thread t = new Thread(runnable);
+        t.start();
 
         mGLView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -77,14 +141,14 @@ public class MainActivity extends Activity {
                     case MotionEvent.ACTION_MOVE:
 
                         //If only one finger, rotate, redraw, and store position.
-                        if (event.getPointerCount() == 1){
-                            if (touching){
+                        if (event.getPointerCount() == 1) {
+                            if (touching) {
 
                             }
                         }
 
                         //If two (or more) fingers, zoom (redraws automatically) and store position.
-                        else if (event.getPointerCount() > 1){
+                        else if (event.getPointerCount() > 1) {
                             float dist = (float) Math.sqrt(Math.abs((event.getX(1) - event.getX(0)) * (event.getX(1) - event.getX(0) + (event.getY(1) - event.getY(0)) * (event.getY(1) - event.getY(0)))));
                             //zoom(prevDist - dist);
                             prevDist = dist;
@@ -93,10 +157,22 @@ public class MainActivity extends Activity {
                 }
 
 
-
                 return true;
             }
         });
+    }
+
+    public View newRow(String name, String value) {
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView tvName = new TextView(this);
+        tvName.setText(name);
+        TextView tvValue = new TextView(this);
+        tvValue.setText(value);
+        ll.addView(tvName);
+        ll.addView(tvValue);
+        return ll;
     }
 
     @Override
@@ -142,6 +218,25 @@ public class MainActivity extends Activity {
         linearContent.removeAllViews();
         linearContent.addView(mGLView);
     }
+
+    public void variaveis(View view) {
+        linearContent.removeAllViews();
+        LinearLayout dadosLayout = new LinearLayout(this);
+        json = "{\"id\":1,\"name\":\"Test 1\",\"values\":{\"temperature\":33,\"vibration\":10,\"time\":100}}";
+
+       // if (!json.isEmpty()) {
+
+            Component component = new Component();
+            //Gson gson = new Gson();
+         //   try {
+                //    component = mapper.readValue(json, Component.class);
+           // } catch (Exception e) {
+          //      e.printStackTrace();
+           // }
+        //}
+
+        linearContent.addView(dadosLayout);
+    }
 }
 
 class ClearGLSurfaceView extends GLSurfaceView {
@@ -153,8 +248,7 @@ class ClearGLSurfaceView extends GLSurfaceView {
         setRenderer(mRenderer);
     }
 
-    public ClearGLSurfaceView(Context context, AttributeSet attrs)
-    {
+    public ClearGLSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mRenderer = new ClearRenderer(context, this);
         setRenderer(mRenderer);
@@ -174,7 +268,13 @@ class ClearRenderer implements GLSurfaceView.Renderer {
     public ClearRenderer(Context context, ClearGLSurfaceView view) {
         this.view = view;
         this.context = context;
-        model = new DrawModel(context, R.raw.rock);
+        try {
+            model = new DrawModel(context, R.raw.rock);
+        } catch (Exception e) {
+            String msg = e.getMessage();
+            Log.i("SSS", msg);
+        }
+
     }
 
     private void loadTexture(GL10 gl, Context mContext, int mTex) {
@@ -195,7 +295,7 @@ class ClearRenderer implements GLSurfaceView.Renderer {
         gl.glEnable(GL10.GL_DEPTH_TEST);
         gl.glEnable(GL10.GL_TEXTURE_2D);
 
-        loadTexture(gl, context, R.drawable.rock);
+        //loadTexture(gl, context, R.drawable.rock);
 
         gl.glTexParameterx(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
         gl.glTexParameterx(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
@@ -210,10 +310,10 @@ class ClearRenderer implements GLSurfaceView.Renderer {
         gl.glClearColor(0f, 0f, .7f, 1.0f);
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glPushMatrix();
-        //gl.glRotatef(angleY, 0f, 1f, 0f);
+        gl.glRotatef(angleY, 0f, 1f, 0f);
         //gl.glRotatef(angleY, 0f, 1f, 0f); x
         //gl.glRotatef(angleY, angleY, 1f, 0f); yy
-        gl.glRotatef(MainActivity.x, MainActivity.x, 1f, MainActivity.prevDist);
+        //gl.glRotatef(MainActivity.x, MainActivity.x, 1f, MainActivity.prevDist);
         model.draw(gl);
         gl.glPopMatrix();
         angleY += 0.4f;
