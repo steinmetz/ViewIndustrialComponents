@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TextureModelDemoAS.iml" filepath="$PROJECT_DIR$/TextureModelDemoAS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ViewIndustrialComponents.iml" filepath="$PROJECT_DIR$/ViewIndustrialComponents.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
-

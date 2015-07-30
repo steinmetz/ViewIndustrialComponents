@@ -1,4 +1,4 @@
-/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/classes/debug
-/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/line-chart-view-0.1.7-a58976c172f952bfe868df7ca159b2aa335af7d0.jar
-/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/library-1.0.17-a162bd7f69c7299869a9c9459f5c96356a4727bc.jar
-/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/gson-2.2.4-1fdc779827b982e554b4505df4f0a2b859285d4f.jar
+C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\classes\debug
+C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\pre-dexed\debug\line-chart-view-0.1.7-18cd8b5a53e2a600469086a2416d7e2c312261fb.jar
+C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\pre-dexed\debug\library-1.0.17-1570ff841ba5c1a451604a58cced32088ee6f3e3.jar
+C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\pre-dexed\debug\gson-2.2.4-35405a0b6452ba087fdbc3626b1401115833a9b8.jar

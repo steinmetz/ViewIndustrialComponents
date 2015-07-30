@@ -141,6 +141,7 @@ public class MainActivity extends Activity {
     }
 
     public void dadosManutView(View view) {
+        atualizandoVariaveis = false;
         linearContent.removeAllViews();
 
         List<LineChartView.Point> points = new ArrayList<LineChartView.Point>();
@@ -153,7 +154,6 @@ public class MainActivity extends Activity {
         LineChartView lineChartView = new LineChartView(this, points);
 
         linearContent.addView(lineChartView);
-        atualizandoVariaveis = false;
 
         //View v = getLayoutInflater().inflate(R.layout.dados_manut, null);
         //LinearLayout dadosManut = (LinearLayout) v.findViewById(R.id.linearDadosManut);
@@ -162,17 +162,17 @@ public class MainActivity extends Activity {
 
 
     public void caracteristicaView(View view) {
+        atualizandoVariaveis = false;
         linearContent.removeAllViews();
         View v = getLayoutInflater().inflate(R.layout.caracteristicas, null);
         LinearLayout linarCaracteristicas = (LinearLayout) v.findViewById(R.id.linearCaracteristicas);
         linearContent.addView(linarCaracteristicas);
-        atualizandoVariaveis = false;
     }
 
     public void tresDView(View view) {
+        atualizandoVariaveis = false;
         linearContent.removeAllViews();
         linearContent.addView(mGLView);
-        atualizandoVariaveis = false;
     }
 
     public void variaveis(View view) {
@@ -194,7 +194,7 @@ public class MainActivity extends Activity {
             public void run() {
                 while (atualizandoVariaveis){
                     try {
-                        String url = "http://10.127.149.107/cps";
+                        String url = "http://143.54.124.136/cps";
 
                         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                                 (Request.Method.GET,
@@ -231,6 +231,7 @@ public class MainActivity extends Activity {
                                     if (!json.isEmpty()) {
                                     Gson gson = new Gson();
                                     try {
+                                        linearContent.removeAllViews();
                                         component = gson.fromJson(json, Component.class);
                                         linearContent.addView(newRow("Temperatura", component.values.temperature));
                                         linearContent.addView(newRow("Vibration", component.values.vibration));

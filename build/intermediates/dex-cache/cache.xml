@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/home/charles/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/gson-2.2.4-1fdc779827b982e554b4505df4f0a2b859285d4f.jar" />
-    </item>
-    <item
-        jar="/home/charles/.gradle/caches/modules-2/files-2.1/org.hogel/line-chart-view/0.1.7/a1911f87090838fe8f19bd0fe535a8df88264495/line-chart-view-0.1.7.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a1911f87090838fe8f19bd0fe535a8df88264495">
-        <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/line-chart-view-0.1.7-a58976c172f952bfe868df7ca159b2aa335af7d0.jar" />
-    </item>
-    <item
-        jar="/home/charles/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.17/f417d7f776d1ee5858fc04d9362aa45e9bedd26b/library-1.0.17.jar"
+        jar="C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.17\f417d7f776d1ee5858fc04d9362aa45e9bedd26b\library-1.0.17.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="f417d7f776d1ee5858fc04d9362aa45e9bedd26b">
-        <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/library-1.0.17-a162bd7f69c7299869a9c9459f5c96356a4727bc.jar" />
+        <dex dex="C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\pre-dexed\debug\library-1.0.17-1570ff841ba5c1a451604a58cced32088ee6f3e3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\org.hogel\line-chart-view\0.1.7\a1911f87090838fe8f19bd0fe535a8df88264495\line-chart-view-0.1.7.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a1911f87090838fe8f19bd0fe535a8df88264495">
+        <dex dex="C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\pre-dexed\debug\line-chart-view-0.1.7-18cd8b5a53e2a600469086a2416d7e2c312261fb.jar" />
+    </item>
+    <item
+        jar="C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\Usuario\AndroidStudioProjects\ViewIndustrialComponents\app\build\intermediates\pre-dexed\debug\gson-2.2.4-35405a0b6452ba087fdbc3626b1401115833a9b8.jar" />
     </item>
 
 </items>
