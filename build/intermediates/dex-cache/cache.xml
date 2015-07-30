@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/home/charles/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/home/charles/workspace/TextureModelDemoAS/app/build/intermediates/pre-dexed/debug/gson-2.2.4-1fdc779827b982e554b4505df4f0a2b859285d4f.jar" />
+    </item>
+    <item
         jar="/home/charles/.gradle/caches/modules-2/files-2.1/org.hogel/line-chart-view/0.1.7/a1911f87090838fe8f19bd0fe535a8df88264495/line-chart-view-0.1.7.jar"
         jumboMode="false"
         revision="21.1.2"

@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bayninestudios.texturemodeldemo.beans.Component;
+import com.google.gson.Gson;
 
 import org.hogel.android.linechartview.LineChartView;
 import org.json.JSONObject;
@@ -89,7 +90,7 @@ public class MainActivity extends Activity {
 
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Log.i("SSS", error.getMessage());
+//                                    Log.i("SSS", error.getMessage());
 
                                 }
                             });
@@ -224,16 +225,19 @@ public class MainActivity extends Activity {
         LinearLayout dadosLayout = new LinearLayout(this);
         json = "{\"id\":1,\"name\":\"Test 1\",\"values\":{\"temperature\":33,\"vibration\":10,\"time\":100}}";
 
-       // if (!json.isEmpty()) {
+        Component component = new Component();
 
-            Component component = new Component();
-            //Gson gson = new Gson();
-         //   try {
-                //    component = mapper.readValue(json, Component.class);
-           // } catch (Exception e) {
-          //      e.printStackTrace();
-           // }
-        //}
+
+        if (!json.isEmpty()) {
+
+
+            Gson gson = new Gson();
+            try {
+                component = gson.fromJson(json, Component.class);
+          } catch (Exception e) {
+               e.printStackTrace();
+          }
+        }
 
         linearContent.addView(dadosLayout);
     }
@@ -269,7 +273,7 @@ class ClearRenderer implements GLSurfaceView.Renderer {
         this.view = view;
         this.context = context;
         try {
-            model = new DrawModel(context, R.raw.rock);
+            model = new DrawModel(context, R.raw.camaro_obj);
         } catch (Exception e) {
             String msg = e.getMessage();
             Log.i("SSS", msg);
@@ -311,9 +315,6 @@ class ClearRenderer implements GLSurfaceView.Renderer {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glPushMatrix();
         gl.glRotatef(angleY, 0f, 1f, 0f);
-        //gl.glRotatef(angleY, 0f, 1f, 0f); x
-        //gl.glRotatef(angleY, angleY, 1f, 0f); yy
-        //gl.glRotatef(MainActivity.x, MainActivity.x, 1f, MainActivity.prevDist);
         model.draw(gl);
         gl.glPopMatrix();
         angleY += 0.4f;
