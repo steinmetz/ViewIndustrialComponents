@@ -56,6 +56,7 @@ public class MainActivity extends Activity {
     LinearLayout linearDados;
 
     String json = "";
+    boolean atualizandoVariaveis = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,55 +71,6 @@ public class MainActivity extends Activity {
 
         mGLView = (GLSurfaceView) findViewById(R.id.surfaceView);
 
-        try {
-            String url = "http://143.54.124.135/cps";
-
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET,
-                            url,
-                            "",
-                            new Response.Listener<JSONObject>() {
-
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    // Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_SHORT).show();
-                                    Log.i("SSS", response.toString());
-                                    //mTxtDisplay.setText("Response: " + response.toString());
-                                }
-                            },
-                            new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-//                                    Log.i("SSS", error.getMessage());
-
-                                }
-                            });
-
-// Access the RequestQueue through your singleton class.
-            MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 10; i++) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            linearContent.addView(newRow("Charles", "123"));
-                        }
-                    });
-                    SystemClock.sleep(1000);
-                }
-            }
-        };
-
-
-        Thread t = new Thread(runnable);
-        t.start();
 
         mGLView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -201,6 +153,7 @@ public class MainActivity extends Activity {
         LineChartView lineChartView = new LineChartView(this, points);
 
         linearContent.addView(lineChartView);
+        atualizandoVariaveis = false;
 
         //View v = getLayoutInflater().inflate(R.layout.dados_manut, null);
         //LinearLayout dadosManut = (LinearLayout) v.findViewById(R.id.linearDadosManut);
@@ -213,34 +166,95 @@ public class MainActivity extends Activity {
         View v = getLayoutInflater().inflate(R.layout.caracteristicas, null);
         LinearLayout linarCaracteristicas = (LinearLayout) v.findViewById(R.id.linearCaracteristicas);
         linearContent.addView(linarCaracteristicas);
+        atualizandoVariaveis = false;
     }
 
     public void tresDView(View view) {
         linearContent.removeAllViews();
         linearContent.addView(mGLView);
+        atualizandoVariaveis = false;
     }
 
     public void variaveis(View view) {
+        atualizandoVariaveis = true;
         linearContent.removeAllViews();
         LinearLayout dadosLayout = new LinearLayout(this);
-        json = "{\"id\":1,\"name\":\"Test 1\",\"values\":{\"temperature\":33,\"vibration\":10,\"time\":100}}";
-
-        Component component = new Component();
 
 
-        if (!json.isEmpty()) {
-
-
-            Gson gson = new Gson();
-            try {
-                component = gson.fromJson(json, Component.class);
-          } catch (Exception e) {
-               e.printStackTrace();
-          }
-        }
 
         linearContent.addView(dadosLayout);
+        atualizaVariaveis();
     }
+
+    public void atualizaVariaveis() {
+
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (atualizandoVariaveis){
+                    try {
+                        String url = "http://10.127.149.107/cps";
+
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                                (Request.Method.GET,
+                                        url,
+                                        "",
+                                        new Response.Listener<JSONObject>() {
+
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                // Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_SHORT).show();
+                                                Log.i("SSS", response.toString());
+                                                json = response.toString();
+                                                //mTxtDisplay.setText("Response: " + response.toString());
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                    Log.i("SSS", "afasdfsd");
+
+                                            }
+                                        });
+
+// Access the RequestQueue through your singleton class.
+                        MySingleton.getInstance(MainActivity.this).addToRequestQueue(jsObjRequest);
+                        SystemClock.sleep(500);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Component component = new Component();
+
+
+                                    if (!json.isEmpty()) {
+                                    Gson gson = new Gson();
+                                    try {
+                                        component = gson.fromJson(json, Component.class);
+                                        linearContent.addView(newRow("Temperatura", component.values.temperature));
+                                        linearContent.addView(newRow("Vibration", component.values.vibration));
+                                        linearContent.addView(newRow("Time", component.values.time));
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+
+        Thread thread = new Thread(runnable);
+        thread.start();
+
+    }
+
+
 }
 
 class ClearGLSurfaceView extends GLSurfaceView {

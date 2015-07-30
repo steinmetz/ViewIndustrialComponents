@@ -5,8 +5,8 @@ package com.bayninestudios.texturemodeldemo.beans;
  */
 public class NameValue {
 
-    String temperature;
-    String vibration;
-    String time;
+    public String temperature;
+    public String vibration;
+    public String time;
 
 }
